@@ -9,8 +9,9 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
-        health = GetComponent<GenericHealthComponent>();
-        combat = GetComponent<GenericCombatComponent>();
-        movement = GetComponent<GenericMovimentComponent>();
+
+        //health = GetComponent<GenericHealthComponent>();
+        //combat = GetComponent<GenericCombatComponent>();
+        //movement = GetComponent<GenericMovimentComponent>();
     }
 }

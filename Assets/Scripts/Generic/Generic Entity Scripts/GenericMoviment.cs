@@ -9,26 +9,28 @@ public abstract class GenericMovimentComponent : MonoBehaviour
     protected virtual float speed => 5f;
     protected virtual bool facingRight { get; set; } = true;
 
+    protected virtual void Awake()
+    {
+        animator = GetComponent<Animator>();
+        Rigidbody = GetComponent<Rigidbody2D>();
+    }
+
     protected void FixedUpdate() 
     {
         handleMoviment();
-        handleMovimentAnimation();
     }
 
     // scripts
     protected abstract void handleMoviment();
 
-    protected virtual void handleMovimentAnimation()
+    protected virtual void handleFlipMovimentAnimation()
     {
-        animator.SetFloat("Horizontal", Mathf.Abs(Rigidbody.linearVelocityX));
-        animator.SetFloat("Vertical", Mathf.Abs(Rigidbody.linearVelocityY));
+        // animator.SetBool("IsFacingRight")
 
-        //vira o personagem na direção do movimento
-        if (Rigidbody.linearVelocityX < 0 && facingRight || Rigidbody.linearVelocityX > 0 && !facingRight)
+        if (Rigidbody.linearVelocityX < 0 && facingRight == true || Rigidbody.linearVelocityX > 0 && facingRight == false)
         {
             facingRight = !facingRight;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
-
     }
 }
