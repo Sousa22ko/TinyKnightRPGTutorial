@@ -32,17 +32,21 @@ public class PlayerMovimentComponent : GenericMovimentComponent
 
         if (InputActions == null)
             InputActions = Resources.Load<InputActionAsset>("InputSystem_Actions");
-        
+
         moveActions = InputActions.FindActionMap("Player").FindAction("Move");
     }
-
 
 
     // scripts
     protected override void handleMoviment()
     {
-        Rigidbody.linearVelocity = moveActions.ReadValue<Vector2>().normalized * speed;
-        base.handleFlipMovimentAnimation();
+        var input = moveActions.ReadValue<Vector2>().normalized;
+
+        if (input != null)
+        {
+            Rigidbody.linearVelocity = input * speed;
+            base.handleFlipMovimentAnimation();
+        }
     }
 
 }
