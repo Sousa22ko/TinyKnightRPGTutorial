@@ -3,7 +3,6 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
-
     protected Animator animator;
     public Rigidbody2D rigidBody;
 
