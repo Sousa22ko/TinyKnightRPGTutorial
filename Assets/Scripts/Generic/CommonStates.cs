@@ -1,7 +1,7 @@
 public enum States {
     Idle,
-    Walk,
-    Attack,
+    Moving,
+    Attacking,
     Stun,
     Knockback
 }

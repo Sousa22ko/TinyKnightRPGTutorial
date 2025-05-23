@@ -42,10 +42,17 @@ public class PlayerMovimentComponent : GenericMovimentComponent
     {
         var input = moveActions.ReadValue<Vector2>().normalized;
 
-        if (input != null)
+        Debug.Log(input);
+        // andando
+        if (input != Vector2.zero)
         {
-            Rigidbody.linearVelocity = input * speed;
+            entity.rigidBody.linearVelocity = input * speed;
             base.handleFlipMovimentAnimation();
+            entity.setCurrentState(States.Moving);
+        }
+        else if (entity.getCurrentState() == States.Moving) {
+            entity.rigidBody.linearVelocity = Vector2.zero;
+            entity.setCurrentState(States.Idle);
         }
     }
 

@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 public class PlayerEntity : Entity
 {
 
-    public States currentState = States.Idle;
-
     protected override void Awake()
     {
+        base.Awake();
+
         if (!TryGetComponent(out health))
             health = gameObject.AddComponent<PlayerHealthComponent>();
 
