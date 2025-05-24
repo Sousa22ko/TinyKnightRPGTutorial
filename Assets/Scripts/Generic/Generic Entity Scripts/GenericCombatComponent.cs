@@ -43,7 +43,6 @@ public abstract class GenericCombatComponent : MonoBehaviour
             foreach (Collider2D enemy in enemies)
             {
                 enemy.GetComponent<GenericHealthComponent>().changeHealth(-damage);
-                Debug.Log(enemy.gameObject.tag);
             }
         }
     }
