@@ -42,7 +42,6 @@ public class PlayerMovimentComponent : GenericMovimentComponent
     {
         var input = moveActions.ReadValue<Vector2>().normalized;
 
-        Debug.Log(input);
         // andando
         if (input != Vector2.zero)
         {

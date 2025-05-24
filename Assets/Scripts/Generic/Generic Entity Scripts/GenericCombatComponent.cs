@@ -8,7 +8,7 @@ public abstract class GenericCombatComponent : MonoBehaviour
     protected Transform attackPoint;
     protected LayerMask enemyLayer;
 
-    protected virtual float attackRange => 1f;
+    protected virtual float attackRange => 0.5f;
     protected virtual float damage => 5f;
     protected virtual float stunTime => 5f;
     protected virtual float knockBackForce => 5f;
@@ -18,6 +18,7 @@ public abstract class GenericCombatComponent : MonoBehaviour
     protected virtual void Awake()
     {
         entity = GetComponent<Entity>();
+        attackPoint = transform.Find("AttackPoint");
     }
 
     protected void Update()
@@ -26,6 +27,7 @@ public abstract class GenericCombatComponent : MonoBehaviour
         {
             attackCooldownTimer -= Time.deltaTime;
         }
+        attack();
     }
 
     // scripts
@@ -39,9 +41,20 @@ public abstract class GenericCombatComponent : MonoBehaviour
             Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
             foreach (Collider2D enemy in enemies)
-            { 
-                //enemy.
+            {
+                enemy.GetComponent<GenericHealthComponent>().changeHealth(-damage);
+                Debug.Log(enemy.gameObject.tag);
             }
+        }
+    }
+
+    // Debug
+    private void OnDrawGizmos()
+    {
+        if (attackPoint != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
     }
 

@@ -34,7 +34,20 @@ public abstract class Entity : MonoBehaviour
     {
         foreach (States state in Enum.GetValues(typeof(States))) 
         {
-            animator.SetBool($"is{state}", state == currentState);
+            if (HasParameter($"{state}"))
+            {
+                animator.SetBool($"is{state}", state == currentState);
+            }
         }
+    }
+
+    private bool HasParameter(string paramName)
+    {
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+            if (param.name == $"is{paramName}")
+                return true;
+        }
+        return false;
     }
 }

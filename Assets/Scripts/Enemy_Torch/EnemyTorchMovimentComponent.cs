@@ -25,7 +25,9 @@ public class EnemyTorchMovimentComponent : GenericMovimentComponent
     // scripts
     protected override void handleMoviment()
     {
-
+        //temporario
+        entity.rigidBody.linearVelocity = Vector2.zero;
+        entity.setCurrentState(States.Idle);
     }
 
 }
