@@ -9,6 +9,8 @@ public abstract class GenericHealthComponent : MonoBehaviour
 
     protected float health = 10f;
     protected virtual float maxHealth => 10f;
+    protected virtual float autoHeal => 0f;
+    protected virtual float continuousDamage => 0f;
 
     protected Vector3 hpBarOffset = new Vector3(0, 0.8f, 0);
 
@@ -17,7 +19,9 @@ public abstract class GenericHealthComponent : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
+
     private Coroutine flashRoutine;
+    private Coroutine autoChangeHealthRoutine;
 
     public float flashDuration = 0.1f;
 
@@ -48,6 +52,11 @@ public abstract class GenericHealthComponent : MonoBehaviour
     protected virtual void Update()
     {
         sliderTransform.localPosition = hpBarOffset;
+
+        if ((autoHeal > 0 || continuousDamage > 0) && autoChangeHealthRoutine == null)
+        {
+            autoChangeHealthRoutine = StartCoroutine(AutoChangeHealthRoutine());
+        }
     }
 
     public virtual void changeHealth(float amount)
@@ -87,5 +96,32 @@ public abstract class GenericHealthComponent : MonoBehaviour
         spriteRenderer.color = hitColor;
         yield return new WaitForSeconds(flashDuration);
         spriteRenderer.color = originalColor;
+    }
+
+    private IEnumerator AutoChangeHealthRoutine()
+    {
+        while (true)
+        {
+            bool shouldHeal = autoHeal > 0 && health < maxHealth;
+            bool shouldDamage = continuousDamage > 0;
+
+            if (!shouldHeal && !shouldDamage)
+                break;
+
+            float delta = 0f;
+
+            if (shouldHeal)
+                delta += autoHeal;
+
+            if (shouldDamage)
+                delta -= continuousDamage;
+
+            if (delta != 0)
+                changeHealth(delta);
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        autoChangeHealthRoutine = null; 
     }
 }
