@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0593b6f007c7bf840aec92d7f12e235f
+guid: 4a19ea8be5e9a114e9da09e0e4ef7822
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 150977912057892676
-    second: "Sem t\xEDtulo fundo-Photoroom_0"
+      213: 247011961975413162
+    second: bar_round_small_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -74,7 +74,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Sem t\xEDtulo fundo-Photoroom_0"
+      name: bar_round_small_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 516
-        height: 265
+        width: 96
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 44f04217c91681200800000000000000
-      internalID: 150977912057892676
+      spriteID: aa911d812109d6300800000000000000
+      internalID: 247011961975413162
       vertices: []
       indices: 
       edges: []
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bar_round_small_0: 247011961975413162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

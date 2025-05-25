@@ -50,4 +50,9 @@ public abstract class Entity : MonoBehaviour
         }
         return false;
     }
+
+    public void invokeChangeHealth() 
+    {
+        combat.causeDamage();
+    }
 }

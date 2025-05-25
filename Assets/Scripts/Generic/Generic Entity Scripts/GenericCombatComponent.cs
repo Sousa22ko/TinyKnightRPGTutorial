@@ -38,12 +38,16 @@ public abstract class GenericCombatComponent : MonoBehaviour
             entity.setCurrentState(States.Attacking);
             attackCooldownTimer = attackCooldown;
 
-            Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        }
+    }
 
-            foreach (Collider2D enemy in enemies)
-            {
-                enemy.GetComponent<GenericHealthComponent>().changeHealth(-damage);
-            }
+    public void causeDamage()
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+
+        foreach (Collider2D enemy in enemies)
+        {
+            enemy.GetComponent<GenericHealthComponent>().changeHealth(-damage);
         }
     }
 
