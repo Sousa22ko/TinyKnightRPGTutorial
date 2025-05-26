@@ -41,6 +41,7 @@ public abstract class GenericCombatComponent : MonoBehaviour
         }
     }
 
+    // triggered in animation hit frame by Entity.invokeChangeHealth
     public void causeDamage()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);

@@ -119,7 +119,7 @@ public abstract class GenericHealthComponent : MonoBehaviour
             if (delta != 0)
                 changeHealth(delta);
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
         }
 
         autoChangeHealthRoutine = null; 

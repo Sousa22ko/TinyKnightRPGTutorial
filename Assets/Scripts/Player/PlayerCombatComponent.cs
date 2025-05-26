@@ -32,7 +32,7 @@ public class PlayerCombatComponent : GenericCombatComponent
     // scripts
     protected override void attack()
     {
-        if (attackActions.triggered)
+        if (attackActions.IsPressed())
         {
             base.attack();
         }
