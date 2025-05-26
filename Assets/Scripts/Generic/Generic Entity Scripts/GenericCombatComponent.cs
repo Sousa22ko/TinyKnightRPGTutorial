@@ -8,7 +8,7 @@ public abstract class GenericCombatComponent : MonoBehaviour
     protected Transform attackPoint;
     protected LayerMask enemyLayer;
 
-    protected virtual float attackRange => 0.5f;
+    public virtual float attackRange => 0.5f;
     protected virtual float damage => 5f;
     protected virtual float stunTime => 5f;
     protected virtual float knockBackForce => 5f;
@@ -27,7 +27,7 @@ public abstract class GenericCombatComponent : MonoBehaviour
         {
             attackCooldownTimer -= Time.deltaTime;
         }
-        attack();
+        attack(); // cara problematico
     }
 
     // scripts
@@ -37,7 +37,6 @@ public abstract class GenericCombatComponent : MonoBehaviour
         {
             entity.setCurrentState(States.Attacking);
             attackCooldownTimer = attackCooldown;
-
         }
     }
 
@@ -48,7 +47,10 @@ public abstract class GenericCombatComponent : MonoBehaviour
 
         foreach (Collider2D enemy in enemies)
         {
-            enemy.GetComponent<GenericHealthComponent>().changeHealth(-damage);
+            if (enemy is CapsuleCollider2D)
+            {
+                enemy.GetComponent<GenericHealthComponent>().changeHealth(-damage);
+            }
         }
     }
 

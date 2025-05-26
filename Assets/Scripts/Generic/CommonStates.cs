@@ -3,5 +3,6 @@ public enum States {
     Moving,
     Attacking,
     Stun,
-    Knockback
+    Knockback,
+    Chasing
 }
