@@ -14,13 +14,6 @@ public class PlayerMovimentComponent : GenericMovimentComponent
     [SerializeField] public float customSpeed = 8f;
     protected override float speed => customSpeed;
 
-    [SerializeField] public bool customFacingRight = true;
-    protected override bool facingRight
-    {
-        get => customFacingRight;
-        set => customFacingRight = value;
-    }
-
     // lifecycle 
     private void OnEnable() => InputActions.FindActionMap("Player").Enable();
 

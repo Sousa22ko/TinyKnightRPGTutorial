@@ -51,12 +51,12 @@ public abstract class GenericHealthComponent : MonoBehaviour
 
     protected virtual void Update()
     {
-        sliderTransform.localPosition = hpBarOffset;
-
         if ((autoHeal > 0 || continuousDamage > 0) && autoChangeHealthRoutine == null)
         {
             autoChangeHealthRoutine = StartCoroutine(AutoChangeHealthRoutine());
         }
+
+        sliderTransform.localScale = new Vector3(Mathf.Sign(entity.transform.localScale.x), sliderTransform.localScale.y, sliderTransform.localScale.z);
     }
 
     public virtual void changeHealth(float amount)
@@ -122,6 +122,6 @@ public abstract class GenericHealthComponent : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        autoChangeHealthRoutine = null; 
+        autoChangeHealthRoutine = null;
     }
 }

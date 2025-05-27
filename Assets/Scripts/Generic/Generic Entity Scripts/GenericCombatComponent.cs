@@ -5,15 +5,15 @@ public abstract class GenericCombatComponent : MonoBehaviour
 
     protected Entity entity;
     
-    protected Transform attackPoint;
-    protected LayerMask enemyLayer;
+    public Transform attackPoint;
+    public LayerMask enemyLayer;
 
-    public virtual float attackRange => 0.5f;
-    protected virtual float damage => 5f;
-    protected virtual float stunTime => 5f;
-    protected virtual float knockBackForce => 5f;
-    protected virtual float attackCooldown => 2f;
-    protected float attackCooldownTimer;
+    public virtual float attackRange => 1f;
+    public virtual float damage => 5f;
+    public virtual float stunTime => 5f;
+    public virtual float knockBackForce => 5f;
+    public virtual float attackCooldown => 2f;
+    public float attackCooldownTimer;
 
     protected virtual void Awake()
     {
@@ -27,7 +27,7 @@ public abstract class GenericCombatComponent : MonoBehaviour
         {
             attackCooldownTimer -= Time.deltaTime;
         }
-        attack(); // cara problematico
+        attack();
     }
 
     // scripts

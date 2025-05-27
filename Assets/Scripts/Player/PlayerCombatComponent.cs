@@ -11,7 +11,7 @@ public class PlayerCombatComponent : GenericCombatComponent
 
     //overrides
     [SerializeField] public float customCooldown = 0.5f;
-    protected override float attackCooldown => customCooldown;
+    public override float attackCooldown => customCooldown;
 
     // lifecycle 
     private void OnEnable() => InputActions.FindActionMap("Player").Enable();

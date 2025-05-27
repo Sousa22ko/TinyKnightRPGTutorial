@@ -8,9 +8,9 @@ public abstract class Entity : MonoBehaviour
 
     protected States currentState;
 
-    protected GenericHealthComponent health;
-    protected GenericCombatComponent combat;
-    protected GenericMovimentComponent movement;
+    public GenericHealthComponent health;
+    public GenericCombatComponent combat;
+    public GenericMovimentComponent movement;
 
     protected virtual void Awake()
     {

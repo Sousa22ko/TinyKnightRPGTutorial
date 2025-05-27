@@ -11,12 +11,6 @@ public class EnemyTorchMovimentComponent : GenericMovimentComponent
     [SerializeField] public float customSpeed = 1.5f;
     protected override float speed => customSpeed;
 
-    [SerializeField] public bool customFacingRight = true;
-    protected override bool facingRight
-    {
-        get => customFacingRight;
-        set => customFacingRight = value;
-    }
 
     // lifecycle 
     protected override void Awake()
@@ -37,10 +31,8 @@ public class EnemyTorchMovimentComponent : GenericMovimentComponent
         if (entity.getCurrentState() == States.Chasing)
         {
             float targetDistance = Vector2.Distance(target.transform.position, transform.position);
-
-            if (targetDistance <= entity.GetComponent<GenericCombatComponent>().attackRange)
+            if (targetDistance <= entity.combat.attackRange)
             {
-                entity.setCurrentState(States.Attacking); 
                 entity.rigidBody.linearVelocity = Vector2.zero;
                 return;
             }
@@ -60,10 +52,14 @@ public class EnemyTorchMovimentComponent : GenericMovimentComponent
 
     private void OnTriggerStay2D(Collider2D entityCollider)
     {
-        if (entityCollider.gameObject.CompareTag("Player"))
-        {
-            entity.setCurrentState(States.Chasing);
-        }
+        if (!entityCollider.gameObject.CompareTag("Player")) return;
+        if (entity.getCurrentState() == States.Attacking) return;
+
+        float distance = Vector2.Distance(entity.combat.attackPoint.position, entityCollider.transform.position);
+
+        if (entity.getCurrentState() == States.Idle && distance <= entity.combat.attackRange) return;
+
+        entity.setCurrentState(States.Chasing);
     }
 
     private void OnTriggerExit2D(Collider2D entityCollider)

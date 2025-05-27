@@ -6,7 +6,7 @@ public abstract class GenericMovimentComponent : MonoBehaviour
     protected Entity entity;
 
     protected virtual float speed => 5f;
-    protected virtual bool facingRight { get; set; } = true;
+    public bool facingRight = true;
 
 
     protected virtual void Awake()

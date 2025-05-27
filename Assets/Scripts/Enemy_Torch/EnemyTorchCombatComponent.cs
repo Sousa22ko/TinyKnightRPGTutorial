@@ -6,6 +6,13 @@ public class EnemyTorchCombatComponent : GenericCombatComponent
 
     private GameObject target;
 
+    //overrides
+    [SerializeField] public float customAttackDamage = 2f;
+    public override float damage => customAttackDamage;
+
+    [SerializeField] public float customCooldown = 2f;
+    public override float attackCooldown => customCooldown;
+
 
     protected override void Awake()
     {
@@ -20,12 +27,10 @@ public class EnemyTorchCombatComponent : GenericCombatComponent
         if (attackCooldownTimer <= 0 && target != null)
         {
             float distance = Vector2.Distance(transform.position, target.transform.position);
-            if (distance <= attackRange + 0.1f) // 0.1f de margem
+            if (distance <= attackRange)
             {
-                entity.setCurrentState(States.Attacking);
-                attackCooldownTimer = attackCooldown;
-
                 entity.rigidBody.linearVelocity = Vector2.zero;
+                base.attack();
             }
         }
     }
