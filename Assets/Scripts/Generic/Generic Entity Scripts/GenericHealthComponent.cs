@@ -67,7 +67,18 @@ public abstract class GenericHealthComponent : MonoBehaviour
         FlashDamageFeedback(amount);
 
         if (health <= 0)
+        {
+            GameObject skullPrefab = Resources.Load<GameObject>("Skull");
+            if (skullPrefab != null)
+            {
+                GameObject skull = Instantiate(skullPrefab, transform.position, Quaternion.identity);
+
+                GameObject skullsContainer = GameObject.Find("Skulls");
+                if (skullsContainer != null)
+                    skull.transform.parent = skullsContainer.transform;
+            }
             Destroy(gameObject);
+        }
 
         UpdateHealthBar();
     }

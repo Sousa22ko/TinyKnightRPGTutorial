@@ -13,6 +13,10 @@ public class PlayerCombatComponent : GenericCombatComponent
     [SerializeField] public float customCooldown = 0.5f;
     public override float attackCooldown => customCooldown;
 
+    [SerializeField] public float customDamage = 50f;
+    public override float damage => customDamage;
+    
+
     // lifecycle 
     private void OnEnable() => InputActions.FindActionMap("Player").Enable();
 

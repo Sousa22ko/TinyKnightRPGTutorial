@@ -11,6 +11,8 @@ public class EnemyTorchMovimentComponent : GenericMovimentComponent
     [SerializeField] public float customSpeed = 1.5f;
     protected override float speed => customSpeed;
 
+    public bool enableAgroRange = false;
+
 
     // lifecycle 
     protected override void Awake()
@@ -50,8 +52,24 @@ public class EnemyTorchMovimentComponent : GenericMovimentComponent
 
     }
 
+    private void NonAgro()
+    {
+        if (entity.getCurrentState() == States.Attacking) return;
+
+        float distance = Vector2.Distance(entity.combat.attackPoint.position, target.transform.position);
+
+        if (entity.getCurrentState() == States.Idle && distance <= entity.combat.attackRange) return;
+
+        entity.setCurrentState(States.Chasing);
+    }
+
     private void OnTriggerStay2D(Collider2D entityCollider)
     {
+        if (!enableAgroRange) 
+        {
+            NonAgro();
+            return;
+        }
         if (!entityCollider.gameObject.CompareTag("Player")) return;
         if (entity.getCurrentState() == States.Attacking) return;
 

@@ -18,6 +18,7 @@ public abstract class Entity : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
 
         currentState = States.Idle;
+        ignoreBoundryOnSpawn();
     }
 
     public void setCurrentState(States newState)
@@ -55,4 +56,23 @@ public abstract class Entity : MonoBehaviour
     {
         combat.causeDamage();
     }
+
+    // inicialmente desativa a colisão com boundrys
+    private void ignoreBoundryOnSpawn()
+    {
+        Collider2D entityCollider = GetComponent<Collider2D>();
+        if (entityCollider == null) return;
+
+        GameObject boundryGO = GameObject.Find("BoundryCollider");
+        if (boundryGO == null) return;
+
+        Collider2D[] boundryColliders = boundryGO.GetComponentsInChildren<Collider2D>();
+
+        foreach (Collider2D boundry in boundryColliders)
+        {
+            Physics2D.IgnoreCollision(entityCollider, boundry, true);
+        }
+
+    }
 }
+
