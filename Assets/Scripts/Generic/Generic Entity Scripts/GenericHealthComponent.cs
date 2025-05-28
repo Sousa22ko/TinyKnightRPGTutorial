@@ -73,6 +73,8 @@ public abstract class GenericHealthComponent : MonoBehaviour
             {
                 GameObject skull = Instantiate(skullPrefab, transform.position, Quaternion.identity);
 
+                Util.copyOrderInLayer(entity.transform.GetComponent<SpriteRenderer>(), skull.GetComponent<SpriteRenderer>());
+
                 GameObject skullsContainer = GameObject.Find("Skulls");
                 if (skullsContainer != null)
                     skull.transform.parent = skullsContainer.transform;

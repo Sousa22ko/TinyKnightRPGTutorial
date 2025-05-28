@@ -13,7 +13,7 @@ public class EnemyWaveSpawner : MonoBehaviour
     private List<Transform> spawnPoints = new();
 
     public float spawnTimer = 30f;
-    public float spawnPerWave = 5;
+    public int spawnPerWave = 5;
     public int waveCount = 0;
 
     public void Start()
@@ -37,7 +37,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     public void SpawnWave()
     {
-        List<Transform> chosenSpawns = spawnPoints.OrderBy(x => Random.value).Take(5).ToList();
+        List<Transform> chosenSpawns = spawnPoints.OrderBy(x => Random.value).Take(spawnPerWave).ToList();
 
         foreach (Transform spawnPoint in chosenSpawns)
         {
